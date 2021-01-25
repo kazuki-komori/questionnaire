@@ -1,0 +1,27 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    env_file:
+      - ../.env
+    tty: true
+    container_name: questionnaire_server
+    volumes:
+      - ./:/go/src/github.com/kazuki-komori/questionnaire_server # dockerコンテナ上の変更をローカルのmacに保存
+    ports:
+      - 8080:8080 # 開放するポート
+    depends_on: # dbコンテナに接続する ビルドするのもdbコンテナが立ち上がってからになる
+      - db
+  db:
+    image: mysql:latest # mysql のdockerイメージを取ってくる
+    container_name: questionnaire_db # 自由に決められる
+    volumes:
+      - ./mysql_data:/var/lib/mysql # データ永続化のためのボリューム
+      - ../my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - 3306:3306 # 開放するポート
+    environment:
+      MYSQL_ROOT_PASSWORD: $$MYSQL_PASS # sqlのrootユーザーでログインする時のパスワード
+      MYSQL_DATABASE: questionnaire_db # sqlで初回起動時に作成されるデータベース名
