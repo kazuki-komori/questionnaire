@@ -4,10 +4,11 @@
 
 ### docker compose のビルド
 ```bash
-docker-compose -f docker/docker-compose.yml build
+docker-compose build
 
 ```
 
-```bash サーバーの構築
-docker-compose -f docker/docker-compose.yml up -d
+### サーバーの構築
+```bash
+docker-compose up -d
 ```

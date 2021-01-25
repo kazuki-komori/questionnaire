@@ -2,14 +2,15 @@ version: '3'
 services:
   app:
     build:
-      context: ../
-      dockerfile: docker/Dockerfile
+      context: .
+      dockerfile: ./docker/Dockerfile
+    command: realize start
     env_file:
-      - ../.env
+      - .env
     tty: true
     container_name: questionnaire_server
     volumes:
-      - ./:/go/src/github.com/kazuki-komori/questionnaire_server # dockerコンテナ上の変更をローカルのmacに保存
+      - .:/go/src/github.com/kazuki-komori/questionnaire_server # dockerコンテナ上の変更をローカルのmacに保存
     ports:
       - 8080:8080 # 開放するポート
     depends_on: # dbコンテナに接続する ビルドするのもdbコンテナが立ち上がってからになる
@@ -18,8 +19,8 @@ services:
     image: mysql:latest # mysql のdockerイメージを取ってくる
     container_name: questionnaire_db # 自由に決められる
     volumes:
-      - ./mysql_data:/var/lib/mysql # データ永続化のためのボリューム
-      - ../my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/mysql_data:/var/lib/mysql # データ永続化のためのボリューム
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
       - 3306:3306 # 開放するポート
     environment:
