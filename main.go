@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/kazuki-komori/questionnaire_server/server"
+)
 
 func main() {
-	fmt.Println("hello world")
+	fmt.Println("fuga")
+	server.NewServer()
 }
