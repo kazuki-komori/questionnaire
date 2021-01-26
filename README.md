@@ -2,12 +2,21 @@
 
 ## セットアップ
 
-### docker compose のビルド
+### go module セットアップ
 ```bash
-docker-compose -f docker/docker-compose.yml build
-
+go build
+```
+### マイグレーション
+```bash
+sql-migrate up
 ```
 
-```bash サーバーの構築
-docker-compose -f docker/docker-compose.yml up -d
-```
+## 環境
+
+- Golang v1.15
+
+**データベース**
+- MySQL
+  
+**マイグレーションツール**
+- sql-migrate

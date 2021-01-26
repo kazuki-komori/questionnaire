@@ -13,6 +13,7 @@ func NewServer() {
 	v1 := e.Group("/api/v1")
 
 	v1.GET("/test", Test)
+	v1.POST("/create", PostCreateQuestion)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
