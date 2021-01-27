@@ -1,5 +1,7 @@
 ## questionnaire server
 
+![test](https://github.com/kazuki-komori/questionnaire_server/workflows/test/badge.svg)
+
 ## セットアップ
 
 ### go module セットアップ
