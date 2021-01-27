@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo"
+	"strconv"
 	"time"
 )
 
@@ -11,12 +12,12 @@ type Question struct {
 	Id         int
 	Contents   string `json:"contents"`
 	IsAnswered bool
-	UpdatedAt  time.Time
 	CreatedAt  time.Time
+	UpdatedAt  time.Time
 }
 
+// 質問を登録する関数
 func CreateQuestion(db *gorm.DB, c echo.Context) error {
-
 	question := new(Question)
 	err := c.Bind(question)
 	if err != nil {
@@ -28,6 +29,16 @@ func CreateQuestion(db *gorm.DB, c echo.Context) error {
 		return err
 	}
 	return nil
+}
+
+// 質問を取得する関数
+func GetQuestion(db *gorm.DB, c echo.Context) (*Question, error) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	question := Question{}
+	question.Id = id
+
+	db.First(&question)
+	return &question, nil
 }
 
 func insert(question *Question, db *gorm.DB) error {

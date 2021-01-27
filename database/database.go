@@ -9,13 +9,13 @@ import (
 )
 
 func NewDB() (*gorm.DB, error) {
-	err := godotenv.Load(fmt.Sprintf("./%s.env", os.Getenv("GO_ENV")))
+	err := godotenv.Load(fmt.Sprintf("../%s.env", os.Getenv("GO_ENV")))
 	env := os.Getenv("ENV")
 	DB := os.Getenv("DB")
 	DBUser := os.Getenv("DB_USER")
 	DBPass := os.Getenv("DB_PASS")
 
-	CONNECT := DBUser + ":" + DBPass + "@" + env + "/" + DB
+	CONNECT := DBUser + ":" + DBPass + "@" + env + "/" + DB + "?parseTime=true"
 
 	db, err := gorm.Open("mysql", CONNECT)
 
