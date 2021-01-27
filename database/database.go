@@ -20,7 +20,7 @@ func NewDB() (*gorm.DB, error) {
 	db, err := gorm.Open("mysql", CONNECT)
 
 	if err != nil {
-		return nil, fmt.Errorf("Failed to connect db", err)
+		return nil, fmt.Errorf("failed to connect db= %w", err)
 	}
 	return db, nil
 }

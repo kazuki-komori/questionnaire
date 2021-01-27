@@ -15,7 +15,13 @@ type CreateContext struct {
 }
 
 func PostCreateQuestion(c echo.Context) (error error) {
-	err := database.CreateQuestion(c)
+	db, err := database.NewDB()
+	if err != nil {
+		return c.String(http.StatusBadGateway, "Failed to connect DB")
+	}
+	defer db.Close()
+
+	err = database.CreateQuestion(db, c)
 	if err != nil {
 		return c.String(http.StatusBadGateway, "Failed to create question.")
 	}

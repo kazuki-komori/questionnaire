@@ -3,6 +3,7 @@ module github.com/kazuki-komori/questionnaire_server
 go 1.15
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/cosmtrek/air v1.21.2 // indirect
 	github.com/creack/pty v1.1.11 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
